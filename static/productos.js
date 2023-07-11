@@ -13,7 +13,7 @@ function cargarProductos() {
 }
 
 function agregarProducto(sku, detalle, descripcion, existencias) {
-  fetch(urlProdContoller, {
+  return fetch(urlProdContoller, {
     method: 'POST',
     body: new URLSearchParams({
       sku: sku,
@@ -24,10 +24,10 @@ function agregarProducto(sku, detalle, descripcion, existencias) {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      return data;
     })
     .catch(error => {
-      console.error(error)
+      throw error;
     })
 }
 
