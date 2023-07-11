@@ -1,14 +1,14 @@
 // Función para cargar todos los productos
 function cargarProductos() {
-  fetch(urlProdContoller, {
+  return fetch(urlProdContoller, {
     method: 'GET'
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      return data;
     })
     .catch(error => {
-      console.error(error);
+      throw error;
     });
 }
 
@@ -63,7 +63,7 @@ function borrarProducto(sku) {
     })
 }
 
-cargarProductos();
+/*cargarProductos();
 
 // EJEMPLO DE USO (gracias chat gpt)
 let enviarForm = document.getElementById('enviarForm');
@@ -85,4 +85,4 @@ enviarForm.addEventListener('submit', function (event) {
     values['descripcion'],
     values['existencias']
   );
-})
+})*/
