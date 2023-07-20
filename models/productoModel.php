@@ -16,6 +16,13 @@ class Producto
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function obtenerProducto($sku)
+  {
+    $query = $this->db->prepare('SELECT * FROM productos WHERE sku = ?');
+    $query->execute([$sku]);
+    return $query->fetch(PDO::FETCH_ASSOC);
+  }
+
   public function agregarProducto($sku, $detalle, $descripcion, $existencias)
   {
     $query = $this->db->prepare('INSERT INTO productos (sku, detalle, descripcion, existencias) VALUES (?, ?, ?, ?)');

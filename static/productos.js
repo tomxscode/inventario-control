@@ -31,8 +31,21 @@ function agregarProducto(sku, detalle, descripcion, existencias) {
     })
 }
 
+function obtenerProducto(sku) {
+  return fetch(urlProdIndvContoller + '?sku=' + sku, {
+    method: 'GET'
+  })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      throw error;
+    });
+}
+
 function editarProducto(sku, detalle, descripcion, existencias) {
-  fetch(urlProdContoller, {
+  return fetch(urlProdContoller, {
     method: 'PUT',
     body: new URLSearchParams({
       sku: sku,
@@ -43,10 +56,10 @@ function editarProducto(sku, detalle, descripcion, existencias) {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      return data;
     })
     .catch(error => {
-      console.error(error)
+      throw error;
     })
 }
 
