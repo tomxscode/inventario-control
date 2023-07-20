@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
         <td>${producto.sku}</td>
         <td>${producto.detalle}</td>
         <td>${producto.existencias}</td>
+        <td>
+          <button class="btn btn-danger" onclick="prepararEliminacion('${producto.sku}')">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
         </tr>`
       });
     })
@@ -19,6 +24,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
       console.error(error)
     })
 })
+
+function prepararEliminacion(sku) {
+  borrarProducto(sku)
+    .then(data => {
+      if (data === 1) {
+        agregarAlerta(`El producto "${sku}" fue eliminado con éxito`, 'success');
+      } else {
+        agregarAlerta(`El producto "${sku}" no logró ser eliminado`, 'danger');
+      }
+    })
+    .catch(error => {
+      agregarAlerta(`Ocurrió un error al intentar eliminar el producto, error: ${error}`, 'warning');
+    })
+}
 
 // Acción al enviar el formulario
 formProductos.addEventListener('submit', function (event) {

@@ -51,15 +51,15 @@ function editarProducto(sku, detalle, descripcion, existencias) {
 }
 
 function borrarProducto(sku) {
-  fetch(urlProdContoller + '?sku=' + sku, {
+  return fetch(urlProdContoller + '?sku=' + sku, {
     method: 'DELETE'
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      return data;
     })
     .catch(error => {
-      console.error(error)
+      throw error;
     })
 }
 
