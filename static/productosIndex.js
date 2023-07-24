@@ -14,6 +14,32 @@ document.addEventListener('DOMContentLoaded', function (event) {
   edicion = false;
   // Cargado de items
   cargarInformacion();
+
+  // Comprobación del input SKU
+  const skuInput = document.querySelector('input[name="sku"]');
+  const charCountElement = document.getElementById("charCount");
+  const errorSKU = document.getElementById("errorSKU");
+
+  function updateCharCount() {
+    const skuValue = skuInput.value.trim(); // Obtener el valor del SKU eliminando espacios en blanco
+    const maxLenght = 6; // Longitud máxima del SKU
+    const charCount = skuValue.length;
+
+    // Actualizar el texto del contador
+    charCountElement.textContent = `${charCount}/${maxLenght}`;
+  }
+
+  skuInput.addEventListener('input', function () {
+    const skuValue = skuInput.value.trim();
+    const maxLenght = 6;
+    if (skuValue.length > maxLenght) {
+      errorSKU.textContent = "El SKU no puede tener más de 6 carácteres";
+      skuInput.value = skuValue.slice(0, maxLenght);
+    } else {
+      errorSKU.textContent = "";
+    }
+    updateCharCount();
+  })
 })
 
 function cargarInformacion() {
