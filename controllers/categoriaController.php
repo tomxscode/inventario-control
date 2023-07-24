@@ -22,3 +22,11 @@ class CategoriaController
     echo json_encode($categoria);
   }
 }
+
+// Creando controlador
+$controlador = new CategoriaController();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $concepto = $_POST['concepto'];
+  $descripcion = $_POST['descripcion'];
+  $controlador->agregarCategoria($concepto, $descripcion);
+}

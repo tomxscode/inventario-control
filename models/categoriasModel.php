@@ -11,15 +11,25 @@ class Categoria
 
   public function obtenerCategorias()
   {
-    $query = $this->db->prepare('SELECT * FROM categorias');
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+    try {
+      $query = $this->db->prepare('SELECT * FROM categorias');
+      $query->execute();
+      return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      $error = array("error" => "Error al obtener categorías: " . $e->getMessage());
+      return $error;
+    }
   }
 
   public function agregarCategoria($concepto, $descripcion)
   {
-    $query = $this->db->prepare('INSERT INTO categorias (concepto, descripcion) VALUES (?, ?)');
-    $query->execute([$concepto, $descripcion]);
-    return $query->rowCount();
+    try {
+      $query = $this->db->prepare('INSERT INTO categorias (concepto, descripcion) VALUES (?, ?)');
+      $query->execute([$concepto, $descripcion]);
+      return $query->rowCount();
+    } catch (PDOException $e) {
+      $error = array("error" => "Error al agregar categoría: " . $e->getMessage());
+      return $error;
+    }
   }
 }
