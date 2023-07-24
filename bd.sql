@@ -2,7 +2,7 @@ CREATE DATABASE inventario_control;
 USE inventario_control;
 
 CREATE TABLE categorias (
-    id int primary key identity(1),
+    id int AUTO_INCREMENT primary key,
     concepto varchar(128) unique not null,
     descripcion varchar(256) null
 );
@@ -13,3 +13,11 @@ CREATE TABLE productos (
     descripcion varchar(256) null,
     existencias int default(0) not null
 );
+
+ALTER TABLE productos
+ADD COLUMN categoria INT,
+ADD CONSTRAINT fk_categoria
+    FOREIGN KEY (categoria)
+    REFERENCES categorias(id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL;
