@@ -11,7 +11,6 @@ function cargarProductos() {
       throw error;
     });
 }
-
 function agregarProducto(sku, detalle, descripcion, existencias) {
   return fetch(urlProdContoller, {
     method: 'POST',

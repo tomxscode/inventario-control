@@ -1,11 +1,24 @@
 let tablaContenedor = document.getElementById('items-tabla');
 let formProductos = document.getElementById('formProductos');
 let edicion = false, skuEdicion = 0;
+let btnRecargar = document.getElementById('btnRecargar');
+
+btnRecargar.addEventListener('click', function (event) {
+  event.preventDefault();
+  cargarInformacion();
+  agregarAlerta('El contenido fue recargado con éxito', 'info');
+})
 
 document.addEventListener('DOMContentLoaded', function (event) {
   // Establecer edicion en false
   edicion = false;
   // Cargado de items
+  cargarInformacion();
+})
+
+function cargarInformacion() {
+  // Antes de que obtenga los productos, limpiamos la tabla
+  tablaContenedor.innerHTML = "";
   const items = cargarProductos()
     .then(data => {
       // Por cada vuelta en data, nos dará la info de un producto
@@ -29,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     .catch(error => {
       console.error(error)
     })
-})
+}
 
 function prepararEdicion(sku) {
   edicion = true;

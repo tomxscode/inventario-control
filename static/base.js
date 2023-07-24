@@ -5,8 +5,3 @@ const urlProdContoller = urlMadre + "/inventario-control/controllers/productoCon
 const urlProdIndvContoller = urlMadre + "/inventario-control/controllers/prod_IndvController.php";
 
 // FUNCIONES
-const alertas = document.getElementById('alertas');
-function agregarAlerta(contenido, tipo, clases) {
-  alertas.innerHTML += `
-  <div class="alert alert-${tipo} ${clases ?? ""}">${contenido}</div>`;
-}
